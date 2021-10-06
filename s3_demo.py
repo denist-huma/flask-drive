@@ -1,5 +1,11 @@
 import boto3
+from botocore.config import Config
 
+
+# boto3.set_stream_logger("")
+get_config = Config(
+    s3={"addressing_style": "virtual"},
+)
 
 def upload_file(file_name, bucket, object_name=""):
     """
@@ -17,7 +23,7 @@ def list_files(bucket):
     """
     Function to list files in a given S3 bucket
     """
-    s3 = boto3.client('s3')
+    s3 = boto3.client("s3", config=get_config)
     contents = []
     try:
         for item in s3.list_objects(Bucket=bucket)["Contents"]:
