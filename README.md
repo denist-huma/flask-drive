@@ -65,9 +65,23 @@ Required to have docker, git.
 
 ### How to run the container locally
 
+- build
+
+        docker build -t flask-drive .
+
+- configure
+
 ```sh
-docker build -t flask-drive .
-docker run -p 5000:5000 -d -e AWS_ACCESS_KEY_ID="<Your_Access_Key>" -e AWS_SECRET_ACCESS_KEY="<Your_Secret_Key>" -e BUCKET="<Your_Bucket_Name>" flask-drive
+export AWS_ACCESS_KEY_ID="<Your_Access_Key>"
+export AWS_SECRET_ACCESS_KEY="<Your_Secret_Key>"
+export BUCKET="<Your_Bucket_Name>"
+export AWS_DEFAULT_REGION=eu-west-2
+```
+
+- run
+
+```sh
+docker run -p 8080:5000 -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET=$BUCKET -e AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION flask-drive
 ```
 
 Navigate to http://localhost:5000/storage
